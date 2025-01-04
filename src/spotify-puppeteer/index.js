@@ -200,7 +200,9 @@ async function postEpisode(youtubeVideoInfo) {
     await page.waitForSelector(textboxInputSelector, { visible: true });
     const finalDescription = addUrlToDescription(youtubeVideoInfo);
     // focus and selectAll on the description textbox is important in order for the paste to work
+    // using page.type also helps to focus the textbox
     await page.focus(textboxInputSelector);
+    await page.type(textboxInputSelector, ' ');
     await selectAll(page, textboxInputSelector);
     if (isEmpty(finalDescription)) {
       await execClipboardPasteEvent(page, textboxInputSelector, `Video: ${youtubeVideoInfo.url}`);
