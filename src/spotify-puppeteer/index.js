@@ -16,21 +16,23 @@ function addUrlToDescription(youtubeVideoInfo) {
 
 async function setPublishDate(page, date) {
   logger.info('-- Setting publish date');
-  await page.waitForSelector('#date-input', { visible: true });
-  await clickSelector(page, '#date-input');
+  const dateCalendarSelector = '::-p-xpath(//label/span[text() = "Date"]/parent::label/parent::div/parent::div/button)';
+  await page.waitForSelector(dateCalendarSelector, { visible: true });
+  await clickSelector(page, dateCalendarSelector);
 
   await selectCorrectYearAndMonthInDatePicker();
   await selectCorrectDayInDatePicker();
 
   async function selectCorrectYearAndMonthInDatePicker() {
     const dateForComparison = `${date.monthAsFullWord} ${date.year}`;
+    // there are two calendars, we click until the left calendar is matching the date
     const currentDateCaptionElementSelector =
       'div[class*="CalendarMonth"][data-visible="true"] div[class*="CalendarMonth_caption"] > strong';
     let currentDate = await getTextContentFromSelector(page, currentDateCaptionElementSelector);
     const navigationButtonSelector =
       compareDates(dateForComparison, currentDate) === -1
-        ? 'div[class*="DayPickerNavigation_leftButton__horizontalDefault"]'
-        : 'div[class*="DayPickerNavigation_rightButton__horizontalDefault"]';
+        ? 'div[class*="calendarDatePicker__navIcon--left"]'
+        : 'div[class*="calendarDatePicker__navIcon--right"]';
 
     while (currentDate !== dateForComparison) {
       await clickSelector(page, navigationButtonSelector);
@@ -41,7 +43,8 @@ async function setPublishDate(page, date) {
 
   async function selectCorrectDayInDatePicker() {
     const dayWithoutLeadingZero = parseInt(date.day, 10);
-    const daySelector = `::-p-xpath(//div[contains(@class, "CalendarMonth") and @data-visible="true"]//td[contains(text(), "${dayWithoutLeadingZero}")])`;
+    // this selector will return two entries, clickSelector should click the first matched element
+    const daySelector = `::-p-xpath(//div[contains(@class, "CalendarMonth") and @data-visible="true"]//td[text() = "${dayWithoutLeadingZero}"])`;
     await clickSelector(page, daySelector);
   }
 }
