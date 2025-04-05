@@ -12,6 +12,7 @@ const youtubeDlOptions = {
   noCheckCertificates: true,
   noWarnings: true,
   preferFreeFormats: true,
+  cookies: env.COOKIE_FILE,
 };
 
 function getVideoUrl(videoId) {
