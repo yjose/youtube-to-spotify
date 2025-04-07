@@ -20,6 +20,7 @@ const defaultValues = {
   THUMBNAIL_FILE_FORMAT: 'jpg',
   THUMBNAIL_FILE_TEMPLATE: 'thumbnail.%(ext)s',
   PUPPETEER_HEADLESS: true,
+  COOKIE_FILE: '',
 };
 
 const dotEnvVariables = parseDotEnvVariables();
@@ -68,8 +69,6 @@ module.exports = {
   SPOTIFY_LOGIN: getBoolean(getEnvironmentVariable('SPOTIFY_LOGIN')),
   SPOTIFY_EMAIL: getEnvironmentVariable('SPOTIFY_EMAIL'),
   SPOTIFY_PASSWORD: getEnvironmentVariable('SPOTIFY_PASSWORD'),
-  SPOTIFY_EMAIL: getEnvironmentVariable('SPOTIFY_EMAIL'),
-  SPOTIFY_PASSWORD: getEnvironmentVariable('SPOTIFY_PASSWORD'),
   UPLOAD_TIMEOUT: getEnvironmentVariable('UPLOAD_TIMEOUT'),
   SAVE_AS_DRAFT: getBoolean(getEnvironmentVariable('SAVE_AS_DRAFT')),
   LOAD_THUMBNAIL: getBoolean(getEnvironmentVariable('LOAD_THUMBNAIL')),
@@ -91,4 +90,5 @@ module.exports = {
     getDotEnvironmentVariable('THUMBNAIL_FILE_FORMAT')
   ),
   PUPPETEER_HEADLESS: getBoolean(getDotEnvironmentVariable('PUPPETEER_HEADLESS')),
+  COOKIES_FILE: getDotEnvironmentVariable('COOKIES_FILE'),
 };

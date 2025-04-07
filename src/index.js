@@ -24,14 +24,15 @@ function getYoutubeVideoId() {
     validateYoutubeVideoId(json.id);
     return json.id;
   } catch (err) {
-    throw new Error(`Unable to get youtube video id: ${err}, 
-    please make sure that either the environment variable EPISODE_ID is set with valid id 
+    throw new Error(`Unable to get youtube video id: ${err},
+    please make sure that either the environment variable EPISODE_ID is set with valid id
     or episode path is set correctly using t he environment variables EPISODE_PATH and EPISODE_FILE`);
   }
 }
 
 async function main() {
   const youtubeVideoId = getYoutubeVideoId();
+  console.log('******* loading from new cookie file *******', env.COOKIE_FILE);
 
   const youtubeVideoInfo = await getVideoInfo(youtubeVideoId);
   const { title, description, uploadDate } = youtubeVideoInfo;
