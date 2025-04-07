@@ -90,5 +90,5 @@ module.exports = {
     getDotEnvironmentVariable('THUMBNAIL_FILE_FORMAT')
   ),
   PUPPETEER_HEADLESS: getBoolean(getDotEnvironmentVariable('PUPPETEER_HEADLESS')),
-  COOKIE_FILE: getDotEnvironmentVariable('COOKIE_FILE'),
+  COOKIES_FILE: getDotEnvironmentVariable('COOKIES_FILE'),
 };
