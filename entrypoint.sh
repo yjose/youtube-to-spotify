@@ -9,4 +9,6 @@ echo "Config file content:"
 cat ~/.config/yt-dlp/config
 echo ::endgroup::
 
+
+npx puppeteer browsers install chrome
 npm start --prefix /
