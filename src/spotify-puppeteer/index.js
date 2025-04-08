@@ -68,6 +68,9 @@ async function postEpisode(youtubeVideoInfo) {
     logger.info('Trying to log in and open episode wizard');
     await loginAndWaitForNewEpisodeWizard();
 
+    logger.info('Switching podcast');
+    await switchPodcast();
+
     logger.info('Uploading audio file');
     await uploadEpisode();
 
@@ -274,6 +277,15 @@ async function postEpisode(youtubeVideoInfo) {
   async function goToDashboard() {
     await page.goto('https://podcasters.spotify.com/pod/dashboard/episodes');
     await sleepSeconds(3);
+  }
+
+  async function switchPodcast() {
+    logger.info('-- Switching podcast');
+    await page.goto('https://podcasters.spotify.com/pod/dashboard/episodes');
+    await clickSelector(page, '::-p-xpath(//span[text()="GeeksBlaBla"]/parent::div)');
+    await sleepSeconds(4);
+    await page.goto('https://creators.spotify.com/pod/dashboard/episode/wizard');
+    await waitForNewEpisodeWizard();
   }
 }
 
