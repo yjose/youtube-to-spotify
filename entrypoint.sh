@@ -1,3 +1,3 @@
 #!/bin/sh -l
 
-npm start
+npm start --prefix /
