@@ -12,12 +12,8 @@ const youtubeDlOptions = {
   noCheckCertificates: true,
   noWarnings: true,
   preferFreeFormats: true,
+  cookies: '~/.cache/yt-dlp/youtube/cookies.txt',
 };
-
-if (env.COOKIES_FILE && env.COOKIES_FILE !== '') {
-  console.log('******* using cookies file *******', env.COOKIES_FILE);
-  youtubeDlOptions.cookies = env.COOKIES_FILE;
-}
 
 function getVideoUrl(videoId) {
   return `https://www.youtube.com/watch?v=${videoId}`;
