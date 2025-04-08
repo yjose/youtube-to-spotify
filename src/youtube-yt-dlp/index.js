@@ -14,7 +14,7 @@ const youtubeDlOptions = {
   preferFreeFormats: true,
 };
 
-if (env.COOKIES_FILE) {
+if (env.COOKIES_FILE && env.COOKIES_FILE !== '') {
   console.log('******* using cookies file *******', env.COOKIES_FILE);
   youtubeDlOptions.cookies = env.COOKIES_FILE;
 }
