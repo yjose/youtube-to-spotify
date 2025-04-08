@@ -68,9 +68,6 @@ async function postEpisode(youtubeVideoInfo) {
     logger.info('Trying to log in and open episode wizard');
     await loginAndWaitForNewEpisodeWizard();
 
-    logger.info('Switching podcast');
-    await switchPodcast();
-
     logger.info('Uploading audio file');
     await uploadEpisode();
 
